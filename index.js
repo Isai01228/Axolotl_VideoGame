@@ -8,7 +8,8 @@ const obstacles = []
 const images = {
     logo: "./images/logo.jpg",
     backg: "./images/backg.jpeg",
-    hero: "./images/hero.png"
+    hero: "./images/hero.png",
+    trunk: "./images/trunk.png"
 }
 class Background {
     constructor() {
@@ -52,7 +53,7 @@ class Axolotl {
     }
 
     draw() {
-        if (this.sx < 0) this.sx = 500
+        if (this.x < -axolotl.width) this.x = 500
         cxt.drawImage(this.image, this.sx, this.sy, 500, 500, this.x, this.y, this.width, this.height)
     }
 
@@ -98,6 +99,25 @@ document.addEventListener("keydown", ({ keyCode }) => {
     }
 })
 
+// class Trunk {
+//     constructor() {
+//         this.x = 
+//     }
+// }
+
+function gameOver() {
+    clearInterval(interval)
+}
+
+function checkColition() {
+    if (axolotl.x >= canvas.width - axolotl.width) {
+        return gameOver()
+    }
+    if (axolotl.y >= canvas.height - axolotl.height) {
+        return gameOver()
+    }
+}
+
 const background = new Background()
 const axolotl = new Axolotl()
 
@@ -106,6 +126,7 @@ function update() {
     cxt.clearRect(0, 0, canvas.width, canvas.height)
     background.draw()
     axolotl.draw()
+    checkColition()
 }
 
 function start() {
