@@ -67,6 +67,15 @@ class Axolotl {
     goDown() {
         this.y += 30
     }
+
+    istoching(trunk) {
+        return (
+            this.x < trunk.x + trunk.width &&
+            this.x + this.width > trunk.x &&
+            this.y < trunk.y + trunk.height &&
+            this.y + this.height > trunk.y
+        )
+    }
 }
 
 document.addEventListener("keydown", ({ keyCode }) => {
@@ -106,7 +115,7 @@ function generateTrunks() {
         min = 0
         const ventanita = 150
         const randomWidth = Math.floor(Math.random() * (max - min))
-        obstacles.push(new Trunk((randomWidth + ventanita), randomWidth))
+        obstacles.push(new Trunk((randomWidth + ventanita), randomWidth, true))
         console.log(obstacles)
     }
 }
@@ -160,6 +169,19 @@ function checkColition() {
     if (axolotl.y >= canvas.height - axolotl.height) {
         return gameOver()
     }
+    if (axolotl.x >= axolotl.istoching(trunk) + 150 == false) {
+        return gameOver()
+    }
+
+    if (axolotl.y >= axolotl.istoching(trunk) == false) {
+        return gameOver()
+    }
+    obstacles.forEach((trunk, i) => {
+        if (trunk.x + trunk.width <= 0) {
+            obstacles.splice(i, 1)
+        }
+        axolotl.istoching(trunk) ? gameOver : null
+    })
 }
 
 const background = new Background()
