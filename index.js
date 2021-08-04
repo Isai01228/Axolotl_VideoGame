@@ -101,12 +101,12 @@ class Trunk {
 }
 
 function generateTrunks() {
-    if (frames % 300 === 0) {
-        max = 600
-        min = 1
+    if (frames % 50 === 0) {
+        max = 650
+        min = 0
         const ventanita = 150
         const randomWidth = Math.floor(Math.random() * (max - min))
-        obstacles.push(new Trunk(randomWidth + ventanita, randomWidth))
+        obstacles.push(new Trunk((randomWidth + ventanita), randomWidth))
         console.log(obstacles)
     }
 }
@@ -116,6 +116,38 @@ function drawTrunks() {
 }
 
 const trunk = new Trunk()
+
+class Coral {
+    constructor(x) {
+        this.x = x
+        this.y = canvas.height
+        this.width = 50
+        this.height = 50
+        this.coral = new Image()
+        this.coral.src = images.coral
+    }
+    draw() {
+        this.y--
+            cxt.drawImage(this.coral, this.x, this.y, this.width, this.height)
+    }
+}
+
+function generateCoral() {
+    if (frames % 100 === 0) {
+        max = 650
+        min = 0
+        const ventanita = 150
+        randomWidth = Math.floor(Math.random() * (max - min))
+        obstacles.push(new Coral((randomWidth + ventanita), randomWidth))
+        console.log(obstacles)
+    }
+}
+
+function drawCoral() {
+    obstacles.forEach(coral => coral.draw())
+}
+
+const coral = new Coral()
 
 function gameOver() {
     clearInterval(interval)
@@ -128,7 +160,6 @@ function checkColition() {
     if (axolotl.y >= canvas.height - axolotl.height) {
         return gameOver()
     }
-
 }
 
 const background = new Background()
@@ -142,6 +173,8 @@ function update() {
     checkColition()
     generateTrunks()
     drawTrunks()
+    generateCoral()
+    drawCoral()
 }
 
 function start() {
