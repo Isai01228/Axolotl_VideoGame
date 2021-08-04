@@ -180,7 +180,7 @@ function checkColition() {
         if (trunk.x + trunk.width <= 0) {
             obstacles.splice(i, 1)
         }
-        axolotl.istoching(trunk) ? gameOver : null
+        axolotl.istoching(trunk) ? gameOver() : null
     })
 }
 
