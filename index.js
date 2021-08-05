@@ -10,7 +10,8 @@ const images = {
     backg: "./images/backg.jpeg",
     hero: "./images/hero.png",
     trunk: "./images/trunk.png",
-    coral: "./images/Coral2.png"
+    coral: "./images/Coral2.png",
+    villian: "./images/villian.png"
 }
 class Background {
     constructor() {
@@ -40,7 +41,7 @@ class Background {
 
 class Axolotl {
     constructor() {
-        this.y = 50
+        this.y = 100
         this.x = 400
         this.width = 50
         this.height = 50
